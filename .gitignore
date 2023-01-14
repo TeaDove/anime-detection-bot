@@ -12,6 +12,7 @@
 ### TERRAFORM TMP FILES ###
 **/.terraform
 **/.terraform.lock.hcl
+*.tfstate*
 ### TERRAGRUNT FILES ###
 **/.terragrunt-cache*
 ### LAYERS BUILDS ###

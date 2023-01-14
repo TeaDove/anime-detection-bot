@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "bot_api"
+version = "0.1.0"
+description = ""
+authors = ["Peter Ibragimov"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+ujson = "^4.3.0"
+aws-lambda-powertools = "^1.28.0"
+python-telegram-bot = {extras = ["all"], version = "^20.0"}
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
