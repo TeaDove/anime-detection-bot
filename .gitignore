@@ -13,6 +13,7 @@
 **/.terraform
 **/.terraform.lock.hcl
 *.tfstate*
+**/secrets.yaml
 ### TERRAGRUNT FILES ###
 **/.terragrunt-cache*
 ### LAYERS BUILDS ###

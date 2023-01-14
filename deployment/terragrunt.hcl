@@ -3,9 +3,16 @@ locals {
   stage = get_env("STAGE", "stable")
 
   # В deploy_config.yaml хранятся настройки для конкретного стека, они овверайдят дефолтные настройки
-  local_yaml_config  = yamldecode(file("deploy_config.yaml"))
-  local_stage_config = lookup(local.local_yaml_config["envs"], local.stage, {})
-  local_defaults     = lookup(local.local_yaml_config, "defaults", {})
+  local_yaml_config      = yamldecode(file("deploy_config.yaml"))
+  local_stage_config_pre = lookup(local.local_yaml_config["envs"], local.stage, {})
+  local_defaults_pre     = lookup(local.local_yaml_config, "defaults", {})
+
+  local_yaml_secrets     = yamldecode(file("secrets.yaml"))
+  local_stage_secrets    = lookup(local.local_yaml_secrets["envs"], local.stage, {})
+  local_secrets_defaults = lookup(local.local_yaml_secrets, "defaults", {})
+
+  local_stage_config = merge(local.local_stage_config_pre, local.local_stage_secrets)
+  local_defaults     = merge(local.local_defaults_pre, local.local_secrets_defaults)
   # Соединяем local, default и common конфиги по приоритету локальности Default -> LocalDefault -> Local.
   stage_vars = merge(local.local_defaults, local.local_stage_config)
 
@@ -32,15 +39,29 @@ locals {
 inputs = merge(local.stage_vars, { global_deployment_settings = local.global_deployment_settings }
 )
 
-generate "provider" {
-  path      = "provider.tf"
-  if_exists = "overwrite_terragrunt"
-  contents  = <<EOF
-provider "yandex" {
-  cloud_id  = "${local.stage_vars["yc_cloud_id"]}"
-  folder_id = "${local.stage_vars["yc_folder_id"]}"
-  zone      = "${local.stage_vars["yc_zone"]}"
-}
-EOF
-}
+// generate "provider" {
+//   path      = "provider.tf"
+//   if_exists = "overwrite_terragrunt"
+//   contents  = <<EOF
+// terraform {
+//   required_providers {
+//     telegram = {
+//       source = "yi-jiayu/telegram"
+//       version = "0.2.1"
+//     }
+//   }
+// }
+
+// provider "yandex" {
+//   cloud_id  = "${local.stage_vars["yc_cloud_id"]}"
+//   folder_id = "${local.stage_vars["yc_folder_id"]}"
+//   zone      = "${local.stage_vars["yc_zone"]}"
+// }
+
+// // provider "telegram" {
+// //   bot_token = "${local.stage_vars["bot_token"]}"
+// // }
+// EOF
+// }
+
 ### DO NOT CHANGE ###

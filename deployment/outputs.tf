@@ -1,3 +1,3 @@
 output "apigw_invoke_url" {
-  value = "https://${module.apigw.apigw_id}.apigw.yandexcloud.net"
+  value = local.api_gateway_invoke_url
 }

@@ -2,11 +2,8 @@ department: anime-detection-bot
 stack: backend
 src_path: ../service
 defaults:
-  yc_cloud_id: b1g15gt835j53bc2hir0
-  yc_folder_id: b1gt1lbgafrf073jso0u
-  yc_zone: ru-central1-a
-
-  log_level: DEBUG
+  lambda_envs:
+    log_level: DEBUG
 
 envs:
   stable:

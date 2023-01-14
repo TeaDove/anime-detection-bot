@@ -6,6 +6,12 @@ terraform {
   }
 }
 
+provider "yandex" {
+  cloud_id  = var.global_deployment_settings["yc_cloud_id"]
+  folder_id = var.global_deployment_settings["yc_folder_id"]
+  zone      = var.global_deployment_settings["yc_zone"]
+}
+
 resource "yandex_api_gateway" "rest_api" {
   name = lower(replace(join("_", [var.global_deployment_settings["name_prefix"], "apigw"]), "_", "-"))
   spec = <<-EOT

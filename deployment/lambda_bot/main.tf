@@ -6,6 +6,11 @@ terraform {
   }
 }
 
+provider "yandex" {
+  cloud_id  = var.global_deployment_settings["yc_cloud_id"]
+  folder_id = var.global_deployment_settings["yc_folder_id"]
+  zone      = var.global_deployment_settings["yc_zone"]
+}
 
 locals {
   lambda_name     = "bot-api"
@@ -36,7 +41,7 @@ resource "yandex_function" "function" {
   name               = local.lambda_fullname
   user_hash          = data.archive_file.archive.output_base64sha256
   runtime            = "python39"
-  entrypoint         = "entrypoints.yc_lambda_handler"
+  entrypoint         = "entrypoints.handler"
   memory             = "512"
   execution_timeout  = "30"
   service_account_id = yandex_iam_service_account.sa.id
