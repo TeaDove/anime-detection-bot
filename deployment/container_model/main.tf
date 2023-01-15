@@ -32,6 +32,9 @@ data "external" "registry_id" {
 
 
 resource "null_resource" "build_image" {
+  triggers = {
+    "rebuild_image" = var.rebuild_image ? uuid() : 0
+  }
   provisioner "local-exec" {
     command = "cd ${local.src_directory} && ./build_and_deploy.sh ${data.external.registry_id.result["id"]} ${local.image_name}"
   }

@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "bot_api"
+name = "model_api"
 version = "0.1.0"
 description = ""
 authors = ["Peter Ibragimov"]
@@ -13,6 +13,8 @@ uvloop = "^0.17.0"
 fastapi = "^0.89.1"
 uvicorn = "^0.20.0"
 python-multipart = "^0.0.5"
+torch = "1.13.1"
+torchvision = "0.14.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

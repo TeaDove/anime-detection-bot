@@ -19,7 +19,8 @@ module "lambda_bot" {
 module "container_model" {
   source = "./container_model"
 
-  lambda_envs = merge(var.container_envs, {})
+  lambda_envs   = merge(var.container_envs, {})
+  rebuild_image = var.rebuild_image
 
   global_deployment_settings = var.global_deployment_settings
 }

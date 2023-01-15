@@ -2,6 +2,7 @@ department: anime-detection-bot
 stack: backend
 src_path: ../service
 defaults:
+  rebuild_image: true
   lambda_envs:
     LOG_LEVEL: DEBUG
   container_envs:
