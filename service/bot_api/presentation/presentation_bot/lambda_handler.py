@@ -31,9 +31,13 @@ class LambdaHandler:
         try:
             update = ujson.loads(event["body"])
             logger.debug({"status": "got.update", "update": update})
-            self.loop.run_until_complete(self.app.process_update(Update.de_json(update, self.app.bot)))
+            self.loop.run_until_complete(
+                self.app.process_update(Update.de_json(update, self.app.bot))
+            )
         except Exception:
-            logger.critical({"status": "internal.server.error", "event": event}, exc_info=True)
+            logger.critical(
+                {"status": "internal.server.error", "event": event}, exc_info=True
+            )
             return {"statusCode": 500}
         logger.debug({"status": "event.processed", "event": event})
         return {"statusCode": 200}
