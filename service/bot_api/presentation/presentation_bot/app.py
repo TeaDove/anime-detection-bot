@@ -1,9 +1,12 @@
+import uvloop
 from telegram import Update
 from telegram.ext import Application, ApplicationBuilder, CommandHandler, ContextTypes
 
 from shared.base import logger
 from shared.constants import constants
 from shared.settings import app_settings
+
+uvloop.install()
 
 
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -28,11 +31,7 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
 
 def create_app() -> Application:
     application = (
-        ApplicationBuilder()
-        .pool_timeout(100)
-        .connection_pool_size(50000)
-        .token(app_settings.bot_token)
-        .build()
+        ApplicationBuilder().pool_timeout(100).connection_pool_size(50000).token(app_settings.bot_token).build()
     )
 
     application.add_handler(CommandHandler("start", start_command))

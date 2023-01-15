@@ -32,7 +32,7 @@ data "archive_file" "archive" {
   type        = "zip"
   source_dir  = local.src_directory
   output_path = "${local.src_directory}/.deploy.zip"
-  excludes    = ["${local.src_directory}/.deploy.zip"]
+  excludes    = [".venv/*", ".env", "**/__pycache__", "**/alembic", "alembic.ini", ".deploy.zip", ".pytest_cache"]
 
   depends_on = [null_resource.compile_requirements]
 }
@@ -58,7 +58,7 @@ resource "yandex_function" "function" {
 }
 
 resource "yandex_iam_service_account" "sa" {
-  name = join("-", [var.global_deployment_settings["name_prefix"], "sa"])
+  name = join("-", [var.global_deployment_settings["name_prefix"], "bot-sa"])
 }
 
 resource "yandex_resourcemanager_folder_iam_binding" "sa_binding" {

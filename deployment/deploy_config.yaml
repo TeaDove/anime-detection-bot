@@ -4,6 +4,9 @@ src_path: ../service
 defaults:
   lambda_envs:
     LOG_LEVEL: DEBUG
+  container_envs:
+    LOG_LEVEL: DEBUG
+    service_uvicorn_workers: 2
 
 envs:
   stable:
