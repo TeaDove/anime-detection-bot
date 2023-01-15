@@ -3,10 +3,13 @@ stack: backend
 src_path: ../service
 defaults:
   lambda_envs:
-    log_level: DEBUG
+    LOG_LEVEL: DEBUG
 
 envs:
   stable:
-    log_level: DEBUG
+    lambda_envs:
+      LOG_LEVEL: DEBUG
+
   prod:
-    log_level: DEBUG
+    lambda_envs:
+      LOG_LEVEL: DEBUG

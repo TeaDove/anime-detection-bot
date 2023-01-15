@@ -40,10 +40,10 @@ data "archive_file" "archive" {
 resource "yandex_function" "function" {
   name               = local.lambda_fullname
   user_hash          = data.archive_file.archive.output_base64sha256
-  runtime            = "python39"
+  runtime            = "python311"
   entrypoint         = "entrypoints.handler"
   memory             = "512"
-  execution_timeout  = "30"
+  execution_timeout  = "5"
   service_account_id = yandex_iam_service_account.sa.id
 
   content {

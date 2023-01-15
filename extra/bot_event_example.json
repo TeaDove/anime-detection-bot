@@ -1,0 +1,3 @@
+{
+    "body": "{\"update_id\":365685488,\n\"message\":{\"message_id\":4333,\"from\":{\"id\":418878871,\"is_bot\":false,\"first_name\":\"Peter\",\"last_name\":\"Ibragimov\\ud83d\\udd4a\",\"username\":\"TeaDove\",\"language_code\":\"en\",\"is_premium\":true},\"chat\":{\"id\":418878871,\"first_name\":\"Peter\",\"last_name\":\"Ibragimov\\ud83d\\udd4a\",\"username\":\"TeaDove\",\"type\":\"private\"},\"date\":1673723734,\"text\":\"/help\",\"entities\":[{\"offset\":0,\"length\":5,\"type\":\"bot_command\"}]}}"
+}
