@@ -19,4 +19,7 @@ app = create_app()
 @app.exception_handler(Exception)
 async def unhandled_exception_handler(_: Request, __: Exception):
     logger.critical({"status": "internal.server.error"}, exc_info=True)
-    return UJSONResponse(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, content={"detail": "internal.server.error"})
+    return UJSONResponse(
+        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        content={"detail": "internal.server.error"},
+    )

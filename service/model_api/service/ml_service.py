@@ -1,18 +1,16 @@
-from pathlib import Path
-from typing import List, Tuple
+from dataclasses import dataclass
 
-import numpy as np
-from core.settings import model_settings
-from inference.inference import ParkfinderYOLOv4
-from service.weights_service import WeightsService
+from inference.inference import AnimePredictor
+from supplier.s3_supplier import S3Supplier
 
 
+@dataclass
 class MlService:
-    weights_service = WeightsService()
+    s3_supplier: S3Supplier
 
-    def __init__(self):
-        weights_files = self.weights_service.safe_weights_file()
-        self.model = ParkfinderYOLOv4(path_to_weights=weights_files, path_to_cfg=Path("core/yolov4-obj.cfg"))
+    def __post_init__(self):
+        weights_files = self.s3_supplier.safe_weights_file()
+        self.model = AnimePredictor(weights_files=weights_files)
 
-    def predict(self, image: np.ndarray, image_markup: List[Tuple[float, float]]):
-        return self.model.predict(image, image_markup, th=model_settings.threshold, nms_th=model_settings.nms_threshold)
+    def predict(self, image: str):
+        return self.model.make_prediction(image)
