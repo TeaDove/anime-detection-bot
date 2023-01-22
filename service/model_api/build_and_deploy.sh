@@ -10,5 +10,5 @@ docker login \
   --password "$(yc iam create-token)" \
   cr.yandex
 
-docker build . -t "cr.yandex/${CR_ID}/$2"
-docker push "cr.yandex/${CR_ID}/$2"
+docker build . -t "cr.yandex/${CR_ID}/anime-detection-bot-ml-service:latest"
+docker push "cr.yandex/${CR_ID}/anime-detection-bot-ml-service:latest"

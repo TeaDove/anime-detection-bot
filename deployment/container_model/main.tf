@@ -18,30 +18,6 @@ locals {
   image_name      = "ml-image"
 }
 
-resource "yandex_container_registry" "registry" {
-  name      = join("-", [var.global_deployment_settings["name_prefix"], "model-registry"])
-  folder_id = var.global_deployment_settings["yc_folder_id"]
-}
-
-
-data "external" "registry_id" {
-  program = ["yc", "container", "registry", "get", yandex_container_registry.registry.name, "--format=json", "--cloud-id=${var.global_deployment_settings["yc_cloud_id"]}", "--folder-id=${var.global_deployment_settings["yc_folder_id"]}"]
-
-  depends_on = [yandex_container_registry.registry]
-}
-
-
-# resource "null_resource" "build_image" {
-#   triggers = {
-#     "rebuild_image" = var.rebuild_image ? uuid() : 0
-#   }
-#   provisioner "local-exec" {
-#     command = "cd ${local.src_directory} && ./build_and_deploy.sh ${data.external.registry_id.result["id"]} ${local.image_name}"
-#   }
-
-#   depends_on = [yandex_container_registry.registry]
-# }
-
 resource "yandex_serverless_container" "container" {
   name = local.lambda_fullname
 

@@ -26,4 +26,4 @@ jobs:
         with:
           context: ./service/model_api
           push: true
-          tags: cr.yandex/${{ vars.YCR_ID }}/ml-image:latest
+          tags: cr.yandex/${{ vars.YCR_ID }}/anime-detection-bot-ml-service:latest, cr.yandex/${{ vars.YCR_ID }}/anime-detection-bot-ml-service:github-build
