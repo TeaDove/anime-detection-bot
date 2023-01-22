@@ -27,4 +27,4 @@ jobs:
           context: .
           file: ./service/model_api/Dockerfile
           push: true
-          tags: cr.yandex/${{ env.YCR_ID }}/ml-image:latest
+          tags: cr.yandex/${{ vars.YCR_ID }}/ml-image:latest
