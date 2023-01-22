@@ -25,6 +25,5 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: ./service/model_api
-          file: ./Dockerfile
           push: true
           tags: cr.yandex/${{ vars.YCR_ID }}/ml-image:latest
